@@ -16,10 +16,10 @@ public class Main {
         Catalogo catalogo = new Catalogo();
 
         for (int i = 0; i < filmes.size(); i++) {
-            catalogo.adicionarFilme(filmes.get(i));
+            catalogo.addItem(filmes.get(i));
         }
 
-        TemplateUI ui = new CatalogoUI(catalogo);
+        TemplateUI ui = new CatalogoUI(catalogo, catalogo);
         ui.show();
     }
 }

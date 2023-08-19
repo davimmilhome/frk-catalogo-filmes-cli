@@ -1,11 +1,15 @@
 package main.java.cli.filmes.catalogo.ui;
 
+import main.java.cli.filmes.catalogo.Catalogo;
 import main.java.cli.filmes.catalogo.models.Filme;
 
 
 public class CatalogoUI extends PagedListUI<Filme> {
-    public CatalogoUI(PagedList<Filme> pageSource) {
+    private final AddItem<Filme> addItem;
+
+    public CatalogoUI(PagedList<Filme> pageSource, AddItem<Filme> addItem) {
         super("Catálogo de Filmes", pageSource);
+        this.addItem = addItem;
     }
 
 
@@ -34,8 +38,8 @@ public class CatalogoUI extends PagedListUI<Filme> {
     }
 
     protected void addItem() {
-        Filme f1 = new Filme("Teste");
-        FilmeUI ui = new FilmeUI("Novo Filme", f1, new EditItemCallback<>() {
+        Filme newFilme = new Filme("Teste");
+        FilmeUI ui = new FilmeUI("Novo Filme", newFilme, new EditItemCallback<>() {
             @Override
             public void remove(Filme item) {
                 System.out.println(item.getNomeFilme());
@@ -43,19 +47,22 @@ public class CatalogoUI extends PagedListUI<Filme> {
 
             @Override
             public void add(Filme item) {
-                System.out.println(item.getNomeFilme());
+                addItem.addItem(item);
             }
 
             @Override
             public boolean isNew(Filme ref) {
-                if (ref.equals(f1)) {
+                if (ref.equals(newFilme)) {
                     return false;
                 } else {
                     return true;
                 }
             }
         });
+
+
         ui.show();
+        addItem.addItem(newFilme);
     }
 
 }

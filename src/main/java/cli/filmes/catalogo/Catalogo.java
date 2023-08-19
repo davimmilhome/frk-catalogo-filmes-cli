@@ -2,12 +2,15 @@ package main.java.cli.filmes.catalogo;
 
 
 import main.java.cli.filmes.catalogo.models.Filme;
+import main.java.cli.filmes.catalogo.ui.AddItem;
+import main.java.cli.filmes.catalogo.ui.PagedList;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Catalogo implements main.java.cli.filmes.catalogo.ui.PagedList<Filme> {
+public class Catalogo implements PagedList<Filme>, AddItem<Filme> {
+
     private List<Filme> filmes;
 
     public Catalogo() {
@@ -31,7 +34,7 @@ public class Catalogo implements main.java.cli.filmes.catalogo.ui.PagedList<Film
         return listagem;
     }
 
-    void adicionarFilme(Filme filme) {
+    public void addItem(Filme filme) {
         filmes.add(filme);
     }
 
